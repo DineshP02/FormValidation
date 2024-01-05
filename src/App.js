@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+
+import { UserValidation } from "./Validation";
 
 function App() {
+  const createUser = async (e) => {
+    e.preventDefault();
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      password: e.target[2].value,
+    };
+    console.log(formData);
+    const isValid = await UserValidation.isValid(formData);
+    console.log(isValid);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 style={{ color: "red" }}>Validation</h1>
+
+      <form className="Form" onSubmit={createUser}>
+        <label>Name:</label>
+        <br />
+        <input type="text" placeholder="Enter the name" />
+        <br />
+        <label>Email:</label>
+        <br />
+        <input type="text" placeholder="Enter the Email" />
+        <br />
+        <label>Password:</label>
+        <br />
+        <input type="password" placeholder="Enter the password" />
+        <br />
+        <input className="submit" type="submit" style={{ marginTop: "10px" }} />
+      </form>
     </div>
   );
 }
